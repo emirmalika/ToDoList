@@ -16,17 +16,17 @@ final class ViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "Identifier")
+        table.register(TasksTableViewCell.self, forCellReuseIdentifier: "Identifier")
         
         return table
     }()
     
-    var tasks: [String] = []
+    var tasks: [Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tasks = ["купить хлеб", "поработать", "сходить в магазин", "написать приложение"]
+        tasks = Array(repeating: Task(title: "Магазин", description: "купить хлеб", date: "23 августа", status: "Выполнен"), count: 10)
         
         view.addSubview(tableView)
         
@@ -48,13 +48,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Identifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TasksTableViewCell.reuseIdentifier, for: indexPath) as! TasksTableViewCell
         
-        var listConfiguration = cell.defaultContentConfiguration()
-        listConfiguration.text = tasks[indexPath.row]
-        
-        cell.contentConfiguration = listConfiguration
-        
+        let task = tasks[indexPath.row]
+        cell.configureCell(with: task)
+
         return cell
     }
     
