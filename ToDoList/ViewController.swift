@@ -26,16 +26,29 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tasks = Array(repeating: Task(title: "Магазин", description: "купить хлеб", date: "23 августа", status: "Выполнен"), count: 10)
+        tasks = Array(repeating: Task(title: "Магазин", description: "купить хлеб", date: "23 августа", status: "Выполнен"), count: 30)
         
         view.addSubview(tableView)
         
+        setupLayout()
+        setupNavigationBar()
+    }
+    
+    func setupLayout() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+    
+    func setupNavigationBar() {
+        let editAction = UIAction { _ in
+            self.tableView.isEditing.toggle()
+        }
+        navigationItem.title = "Задачи"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit, primaryAction: editAction, menu: nil)
     }
 }
 
@@ -56,5 +69,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let task = tasks[sourceIndexPath.row]
+        tasks.remove(at: sourceIndexPath.row)
+        tasks.insert(task, at: destinationIndexPath.row)
+        
+        tableView.reloadData()
+    }
     
 }
