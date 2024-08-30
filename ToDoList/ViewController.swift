@@ -26,7 +26,9 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tasks = Array(repeating: Task(title: "Магазин", description: "купить хлеб", date: "23 августа", status: "Выполнен"), count: 30)
+        for _ in 0..<25 {
+            tasks.append(Task(title: "Магазин", description: "купить хлеб", date: "\(Int.random(in: 0 ..< 100))", status: "Выполнен"))
+        }
         
         view.addSubview(tableView)
         
@@ -78,4 +80,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            tasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
