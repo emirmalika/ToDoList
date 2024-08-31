@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TasksTableViewCell: UITableViewCell {
+final class TodoTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "Identifier"
     
@@ -45,11 +45,13 @@ final class TasksTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(with task: Task) {
-        titleLabel.text = task.title
-        descriptionLabel.text = task.description
-        dateLabel.text = task.date
-        statusLabel.text = task.status
+    func configureCell(with viewModel: ToDo) {
+        titleLabel.text = viewModel.todo
+        if viewModel.completed == true {
+            statusLabel.text = "Выполнен"
+        } else {
+            statusLabel.text = "Не выполнен"
+        }
     }
     
     private func setupLayout() {

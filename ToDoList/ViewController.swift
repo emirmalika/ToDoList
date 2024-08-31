@@ -16,24 +16,24 @@ final class ViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
-        table.register(TasksTableViewCell.self, forCellReuseIdentifier: "Identifier")
+        table.register(TodoTableViewCell.self, forCellReuseIdentifier: "Identifier")
         
         return table
     }()
     
-    var tasks: [Task] = []
-    
+    var todos: [String] = []
+//    var task: ToDo
+    private var viewModels = [ToDo]()
+//    var networkManager: NetworkManager = NetworkManager(with: .default)
+//
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for _ in 0..<25 {
-            tasks.append(Task(title: "Магазин", description: "купить хлеб", date: "\(Int.random(in: 0 ..< 100))", status: "Выполнен"))
-        }
-        
         view.addSubview(tableView)
         
         setupLayout()
         setupNavigationBar()
+        fetchData()
     }
     
     func setupLayout() {
@@ -52,30 +52,46 @@ final class ViewController: UIViewController {
         navigationItem.title = "Задачи"
         navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit, primaryAction: editAction, menu: nil)
     }
+    
+    private func fetchData() {
+        NetworkManager.shared.fetchData { [weak self] result in
+            switch result {
+            case .success(let tasks):
+                self?.viewModels = tasks.todos.compactMap {
+                    ToDo (todo: $0.todo , completed: $0.completed)
+                }
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+                self?.viewModels.reverse()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return tasks.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: TasksTableViewCell.reuseIdentifier, for: indexPath) as! TasksTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.reuseIdentifier, for: indexPath) as! TodoTableViewCell
         
-        let task = tasks[indexPath.row]
-        cell.configureCell(with: task)
+        cell.configureCell(with: viewModels[indexPath.row])
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        let task = tasks[sourceIndexPath.row]
-        tasks.remove(at: sourceIndexPath.row)
-        tasks.insert(task, at: destinationIndexPath.row)
+        let todo = viewModels[sourceIndexPath.row]
+        viewModels.remove(at: sourceIndexPath.row)
+        viewModels.insert(todo, at: destinationIndexPath.row)
         
         tableView.reloadData()
     }
@@ -83,7 +99,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            tasks.remove(at: indexPath.row)
+            viewModels.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
