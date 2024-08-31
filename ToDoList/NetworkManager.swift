@@ -20,25 +20,6 @@ struct Todos: Codable {
 
 class NetworkManager {
     
-//    private let session: URLSession
-//
-//    lazy var jsonDecoder: JSONDecoder = {
-//        JSONDecoder()
-//    }()
-//
-//    init(with configuration: URLSessionConfiguration) {
-//        session = URLSession(configuration: configuration)
-//    }
-//
-//    func fetchData() async throws -> [Todo] {
-//
-//        guard let url = URL(string: "https://dummyjson.com/todo") else { return [] }
-//        let urlRequest = URLRequest(url: url)
-//        let responseData = try await session.data(for: urlRequest)
-//
-//        return try jsonDecoder.decode([Todo].self, from: responseData.0)
-//    }
-    
     static let shared = NetworkManager()
     
     private let urlString = "https://dummyjson.com/todo"
