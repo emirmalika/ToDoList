@@ -20,20 +20,19 @@ final class ViewController: UIViewController {
         
         return table
     }()
-    
-    var todos: [String] = []
-//    var task: ToDo
+
     private var viewModels = [ToDo]()
-//    var networkManager: NetworkManager = NetworkManager(with: .default)
-//
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(tableView)
+        navigationItem.title = "Задачи"
         
         setupLayout()
-        setupNavigationBar()
         fetchData()
+        editAction()
+        addAction()
     }
     
     func setupLayout() {
@@ -45,12 +44,53 @@ final class ViewController: UIViewController {
         ])
     }
     
-    func setupNavigationBar() {
+    
+    func editAction() {
+        
         let editAction = UIAction { _ in
             self.tableView.isEditing.toggle()
         }
-        navigationItem.title = "Задачи"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .edit, primaryAction: editAction, menu: nil)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(systemItem: .edit, primaryAction: editAction, menu: nil)
+    }
+    
+    func addAction() {
+        
+        let addAction = UIAction { _ in
+            let alertController = UIAlertController(title: "Добавить новую задачу", message: nil, preferredStyle: .alert)
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Название задачи"
+            }
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Статус"
+            }
+            
+            let alertAction1 = UIAlertAction(title: "Закрыть", style: .default) { (alert) in
+                
+            }
+            let alertAction2 = UIAlertAction(title: "Создать", style: .cancel) { (alert) in
+                let newItem = alertController.textFields![0].text
+//                let isCompleted = alertController.textFields![1].text
+                
+                if newItem != "" {
+                    self.addItem(todo: newItem!, completed: true)
+                }
+            }
+            
+            alertController.addAction(alertAction1)
+            alertController.addAction(alertAction2)
+            
+            self.present(alertController, animated: true)
+        }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: addAction, menu: nil)
+    }
+    
+    func addItem(todo: String, completed: Bool) {
+        let newItem = ToDo(todo: todo, completed: completed)
+        viewModels.append(newItem)
+        
+        tableView.reloadData()
     }
     
     private func fetchData() {

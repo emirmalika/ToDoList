@@ -14,18 +14,7 @@ final class TodoTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.numberOfLines = 0
         return label
     }()
     
@@ -56,10 +45,10 @@ final class TodoTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         
-        let firstStackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, dateLabel, statusLabel])
+        let firstStackView = UIStackView(arrangedSubviews: [titleLabel, statusLabel])
         firstStackView.translatesAutoresizingMaskIntoConstraints = false
         firstStackView.axis = .vertical
-        firstStackView.spacing = 10
+        firstStackView.spacing = 8
         
         contentView.addSubview(firstStackView)
     
