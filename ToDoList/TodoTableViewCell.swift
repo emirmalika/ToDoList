@@ -24,6 +24,12 @@ final class TodoTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -41,11 +47,21 @@ final class TodoTableViewCell: UITableViewCell {
         } else {
             statusLabel.text = "Не выполнен"
         }
+        dateLabel.text = setupDate()
+    }
+    
+    func setupDate() -> String {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.long
+        let date = formatter.string(from: today)
+        
+        return date
     }
     
     private func setupLayout() {
         
-        let firstStackView = UIStackView(arrangedSubviews: [titleLabel, statusLabel])
+        let firstStackView = UIStackView(arrangedSubviews: [titleLabel, statusLabel, dateLabel])
         firstStackView.translatesAutoresizingMaskIntoConstraints = false
         firstStackView.axis = .vertical
         firstStackView.spacing = 8
