@@ -10,6 +10,7 @@ import UIKit
 final class TodoTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "Identifier"
+    static let shared = TodoTableViewCell()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +56,7 @@ final class TodoTableViewCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.dateStyle = DateFormatter.Style.long
         let date = formatter.string(from: today)
-        
+
         return date
     }
     

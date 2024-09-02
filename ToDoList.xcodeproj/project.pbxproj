@@ -14,9 +14,10 @@
 		8F00EB742C7FAF7100A8B113 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F00EB732C7FAF7100A8B113 /* Assets.xcassets */; };
 		8F00EB772C7FAF7100A8B113 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F00EB752C7FAF7100A8B113 /* LaunchScreen.storyboard */; };
 		8F93FED62C80D95A0035B9DA /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93FED52C80D95A0035B9DA /* TodoTableViewCell.swift */; };
-		8F93FED82C80E1690035B9DA /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93FED72C80E1690035B9DA /* Todo.swift */; };
 		8F93FEDA2C82558C0035B9DA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93FED92C82558C0035B9DA /* NetworkManager.swift */; };
 		8F93FEDD2C83CBDE0035B9DA /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F93FEDB2C83CBDD0035B9DA /* ToDoList.xcdatamodeld */; };
+		8F93FF022C84EA970035B9DA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93FF012C84EA970035B9DA /* CoreDataManager.swift */; };
+		8F93FF042C851C2D0035B9DA /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93FF032C851C2D0035B9DA /* Tasks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +30,10 @@
 		8F00EB762C7FAF7100A8B113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F00EB782C7FAF7100A8B113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F93FED52C80D95A0035B9DA /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
-		8F93FED72C80E1690035B9DA /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		8F93FED92C82558C0035B9DA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8F93FEDC2C83CBDE0035B9DA /* ToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoList.xcdatamodel; sourceTree = "<group>"; };
+		8F93FF012C84EA970035B9DA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8F93FF032C851C2D0035B9DA /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,9 +74,10 @@
 				8F00EB752C7FAF7100A8B113 /* LaunchScreen.storyboard */,
 				8F00EB782C7FAF7100A8B113 /* Info.plist */,
 				8F93FED52C80D95A0035B9DA /* TodoTableViewCell.swift */,
-				8F93FED72C80E1690035B9DA /* Todo.swift */,
 				8F93FED92C82558C0035B9DA /* NetworkManager.swift */,
 				8F93FEDB2C83CBDD0035B9DA /* ToDoList.xcdatamodeld */,
+				8F93FF012C84EA970035B9DA /* CoreDataManager.swift */,
+				8F93FF032C851C2D0035B9DA /* Tasks.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -153,9 +156,10 @@
 				8F93FEDA2C82558C0035B9DA /* NetworkManager.swift in Sources */,
 				8F93FED62C80D95A0035B9DA /* TodoTableViewCell.swift in Sources */,
 				8F00EB6F2C7FAF6E00A8B113 /* ViewController.swift in Sources */,
-				8F93FED82C80E1690035B9DA /* Todo.swift in Sources */,
 				8F00EB6B2C7FAF6E00A8B113 /* AppDelegate.swift in Sources */,
+				8F93FF042C851C2D0035B9DA /* Tasks.swift in Sources */,
 				8F00EB6D2C7FAF6E00A8B113 /* SceneDelegate.swift in Sources */,
+				8F93FF022C84EA970035B9DA /* CoreDataManager.swift in Sources */,
 				8F93FEDD2C83CBDE0035B9DA /* ToDoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
