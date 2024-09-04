@@ -2,7 +2,7 @@
 //  Tasks.swift
 //  ToDoList
 //
-//  Created by Malik Em on 02.09.2024.
+//  Created by Malik Em on 04.09.2024.
 //
 
 import Foundation
@@ -14,6 +14,5 @@ class Tasks {
     init(todo: String, completed: Bool) {
         self.todo = todo
         self.completed = completed
-
     }
 }
